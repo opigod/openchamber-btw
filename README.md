@@ -111,7 +111,7 @@ The patch is deliberately small at the edges:
 
 `session.generate` is a one-shot endpoint: it exposes the session's tools but does not run a tool loop. The dialog's prompt therefore says to answer from what the model already knows and not to call tools.
 
-More detail: [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md).
+More detail: [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md). Maintainers and agents should start with [AGENTS.md](AGENTS.md).
 
 ## Compatibility and updating the patch
 
@@ -152,6 +152,7 @@ The PR is waiting for the linked feature request to be marked `accepted`. The bo
 
 ```text
 .
+├── AGENTS.md                 # maintainer/agent operating manual
 ├── build-openchamber.sh      # Linux and Android builder
 ├── btw-stateless.patch       # the /btw change, applied to upstream
 ├── assets/                   # screenshots used here
