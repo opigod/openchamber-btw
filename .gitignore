@@ -1,0 +1,12 @@
+# Build artifacts and local caches
+out/
+*.pkg.tar.*
+*.apk
+*.aab
+*.tar.gz
+*.zip
+
+# Editor and OS noise
+.DS_Store
+.idea/
+.vscode/
