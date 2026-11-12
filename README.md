@@ -2,7 +2,9 @@
 
 A stateless `/btw` for [OpenChamber](https://github.com/openchamber/openchamber): ask a quick side question without creating a session, forking the chat, or touching the main transcript.
 
-![The /btw dialog on Android, answered without adding a message to the chat](assets/btw-android-dialog.png)
+<p align="center">
+  <img src="assets/btw-android-dialog.png" alt="The /btw dialog on Android, answered without adding a message to the chat" width="340">
+</p>
 
 OpenChamber's stock `/btw` creates a hidden fork session. That is durable, has to wait for the main turn, and leaves another session behind. This project replaces it with one call to OpenCode's `session.generate`, shown in a small transient dialog.
 
