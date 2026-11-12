@@ -8,6 +8,8 @@ A stateless `/btw` for [OpenChamber](https://github.com/openchamber/openchamber)
 
 OpenChamber's stock `/btw` creates a hidden fork session. That is durable, has to wait for the main turn, and leaves another session behind. This project replaces it with one call to OpenCode's `session.generate`, shown in a small transient dialog.
 
+> This is an unofficial community patch. OpenChamber is maintained by its own contributors.
+
 ## What it does
 
 - `/btw <question>` answers from the current conversation's settled context.
