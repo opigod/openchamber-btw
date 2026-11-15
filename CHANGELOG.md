@@ -22,6 +22,8 @@ Base: OpenChamber `v2.7.2` (`1a15151`).
 - Full UI suite: 1383/1386 files passed. The three failures (`HeaderProjectControls`, `issue-3175-browserCaptureRevealsPanel`, `infiniteAnimations`) also fail on the untouched `v2.7.2` tag.
 - `bun run check:changed -- --base 1a15151`: type-check, lint, dead code, and anti-slop passed.
 - `/btw` tests: `btw.test.ts`, `useBtwStore.test.ts`, `BtwDialog.test.tsx`, `ChatInput.magicPrompts.test.tsx`, and `slashCommands.test.ts` passed.
+- Linux package built from the patched tree and installed over 2.7.0.
+- Android debug APK built from the same tree, installed, and launched on the API 35 emulator. The emulator's stored server session had expired, so the dialog was not re-run end to end; the dialog code is unchanged from 2.7.0.
 
 ## 2.7.0 — first standalone release
 
