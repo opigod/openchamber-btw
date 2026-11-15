@@ -145,4 +145,4 @@ Coverage includes:
 - `generateSessionText` sends the prompt, directory header, and abort signal
 - legacy promotion notices
 
-At the time of the 2.7.0 build, the full UI suite passed (`1350/1350` test files) and `bun run check:changed` passed.
+At the 2.7.2 base the full UI suite ran 1386 files: 1383 passed, and the same three files (`HeaderProjectControls`, `issue-3175-browserCaptureRevealsPanel`, `infiniteAnimations`) fail on the untouched `v2.7.2` tag. `bun run check:changed -- --base 1a15151` passed.

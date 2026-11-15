@@ -48,7 +48,7 @@ The Android app is a Capacitor shell. It connects to an existing OpenChamber ser
 
 ## Build from source
 
-The builder downloads the latest OpenChamber `main`, applies `btw-stateless.patch`, and builds the requested target.
+The builder downloads the supported OpenChamber release (`v2.7.2`), applies `btw-stateless.patch`, and builds the requested target. Use `--ref` to build another tag or branch.
 
 ```bash
 git clone https://github.com/opigod/openchamber-btw.git
@@ -115,17 +115,17 @@ More detail: [docs/HOW-IT-WORKS.md](docs/HOW-IT-WORKS.md). Maintainers and agent
 
 ## Compatibility and updating the patch
 
-The patch was generated against OpenChamber `9d6ab41` (2.7.0). The builder applies it with `git apply --3way` and fetches that base commit when a shallow clone does not have it.
+The patch was generated against OpenChamber `v2.7.2` (`1a15151`). The builder applies it with `git apply --3way` and fetches that base commit when a shallow clone does not have it.
 
 If upstream changes one of the touched files, the patch can conflict. The script stops and leaves the checkout in place. Regenerate the patch from the fork:
 
 ```bash
 git clone https://github.com/opigod/openchamber.git
 cd openchamber
-git fetch origin main
+git fetch origin --tags
 git switch feat/stateless-btw-latest
-git rebase origin/main
-git diff origin/main..HEAD > /path/to/openchamber-btw/btw-stateless.patch
+git rebase v2.7.2
+git diff v2.7.2..HEAD > /path/to/openchamber-btw/btw-stateless.patch
 ```
 
 Then update `PATCH_BASE` in `build-openchamber.sh` to the new upstream base and rebuild.

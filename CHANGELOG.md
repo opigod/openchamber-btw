@@ -1,5 +1,28 @@
 # Changelog
 
+## 2.7.2 — rebased onto OpenChamber 2.7.2
+
+Base: OpenChamber `v2.7.2` (`1a15151`).
+
+### `/btw`
+
+- Rebased the stateless `/btw` onto upstream 2.7.2. The dialog behavior is unchanged.
+- Upstream now renders `FormCard` in the transcript (`TranscriptForms`) as well as the dock, so the patch keeps the file and removes only `BtwPanel` and its state.
+- `/btw` still answers through `session.generate` and never creates or forks a session.
+
+### Builds
+
+- The builder now targets the supported release tag `v2.7.2` by default. `--ref` still selects any tag or branch, but the patch only applies to its base.
+- `PATCH_BASE` is `1a15151`.
+- Fixed the stale "known-good `--ref c60bf01`" hint in the patch-application error.
+
+### Verified
+
+- `bun run type-check:ui`: passed.
+- Full UI suite: 1383/1386 files passed. The three failures (`HeaderProjectControls`, `issue-3175-browserCaptureRevealsPanel`, `infiniteAnimations`) also fail on the untouched `v2.7.2` tag.
+- `bun run check:changed -- --base 1a15151`: type-check, lint, dead code, and anti-slop passed.
+- `/btw` tests: `btw.test.ts`, `useBtwStore.test.ts`, `BtwDialog.test.tsx`, `ChatInput.magicPrompts.test.tsx`, and `slashCommands.test.ts` passed.
+
 ## 2.7.0 — first standalone release
 
 Base: OpenChamber `9d6ab41` (2.7.0).

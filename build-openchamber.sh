@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# Download the latest OpenChamber, apply the stateless /btw fix, and build a
-# system package or an Android APK.
+# Download the supported OpenChamber release, apply the stateless /btw fix, and
+# build a system package or an Android APK.
 #
 # Home: https://github.com/opigod/openchamber-btw
 #
@@ -19,7 +19,7 @@ SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 PATCH_FILE="${OPENCHAMBER_BTW_PATCH:-$SCRIPT_DIR/btw-stateless.patch}"
 TARGET="linux"
 INSTALL=0
-REF="${OPENCHAMBER_REF:-main}"
+REF="${OPENCHAMBER_REF:-v2.7.2}"
 WORK_DIR="${OPENCHAMBER_BTW_WORKDIR:-${XDG_CACHE_HOME:-$HOME/.cache}/openchamber-btw-builder}"
 SRC_DIR="$WORK_DIR/source"
 OUT_DIR="$WORK_DIR/out"
@@ -28,7 +28,7 @@ JDK_DIR="$WORK_DIR/jdk21"
 CMDLINE_TOOLS_URL="${ANDROID_CMDLINE_TOOLS_URL:-https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip}"
 ANDROID_COMPILE_SDK="${ANDROID_COMPILE_SDK:-}"
 ANDROID_BUILD_TOOLS="${ANDROID_BUILD_TOOLS:-}"
-PATCH_BASE="9d6ab413596887666241d13dbae76419bf1d6f25"
+PATCH_BASE="1a151518c95cc5ff3578bab593d2f96862ff3bb8"
 
 log() { printf '\n[openchamber-btw] %s\n' "$*"; }
 die() { printf '\n[openchamber-btw] ERROR: %s\n' "$*" >&2; exit 1; }
@@ -41,7 +41,7 @@ Usage: build-openchamber.sh [options]
 Options:
   --target linux|android|all   What to build (default: linux)
   --install                    Install the result (pacman package, and APK via adb)
-  --ref REF                    OpenChamber branch to build (default: main)
+  --ref REF                    OpenChamber branch or tag to build (default: v2.7.2, the patch base)
   --workdir DIR                Cache and build directory
   --patch FILE                 Path to btw-stateless.patch
   --help                       Show this help
@@ -125,7 +125,7 @@ sync_source() {
 
   log "Applying $PATCH_FILE"
   if ! git -C "$SRC_DIR" apply --3way "$PATCH_FILE"; then
-    die "The /btw patch no longer applies to $REF. Update $PATCH_FILE from the fork branch, or build the known-good ref with --ref c60bf01."
+    die "The /btw patch no longer applies to $REF. Update $PATCH_FILE from the fork branch, or build the patch base with --ref v2.7.2."
   fi
 
   log "Installing dependencies"

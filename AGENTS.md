@@ -27,14 +27,14 @@ The fork exists because upstream needs a real branch for the pull request. This 
 | Item | Value |
 | --- | --- |
 | Upstream | `openchamber/openchamber` |
-| Patch base | `9d6ab413596887666241d13dbae76419bf1d6f25` |
-| Upstream version at base | `2.7.0` |
+| Patch base | `1a151518c95cc5ff3578bab593d2f96862ff3bb8` (`v2.7.2`) |
+| Upstream version at base | `2.7.2` |
 | Fork branch | `feat/stateless-btw-latest` |
 | PR branch | `feat/stateless-btw` |
-| Current fork head | `b187366` (`fix(btw): never send /btw from a new-session draft`) |
+| Current fork head | `329cde2` (`fix(btw): never send /btw from a new-session draft`) |
 | Upstream PR | <https://github.com/openchamber/openchamber/pull/6547> |
 | Feature request | <https://github.com/openchamber/openchamber/issues/6548> |
-| Release | <https://github.com/opigod/openchamber-btw/releases/tag/v2.7.0> |
+| Release | <https://github.com/opigod/openchamber-btw/releases/tag/v2.7.2> |
 | Arch package | `openchamber-btw` |
 | Package binary | `openchamber` |
 | Android app id | `com.openchamber.app` |
@@ -106,9 +106,9 @@ Work in the fork:
 
 ```bash
 cd /home/opi/openchamber
-git fetch origin main
+git fetch origin --tags
 git switch feat/stateless-btw-latest
-git rebase origin/main
+git rebase v2.7.2
 # edit source
 ```
 
@@ -132,7 +132,7 @@ bun test src/components/chat/composer/submit/__tests__/slashCommands.test.ts
 bun test src/components/chat/__tests__/ChatInput.magicPrompts.test.tsx
 ```
 
-At the 2.7.0 base the full UI suite was `1350/1350` test files. That number will move upstream; the requirement is no failures, not the exact count.
+At the 2.7.2 base the full UI suite was `1350/1350` test files. Three files fail on the untouched `v2.7.2` tag too: `components/layout/HeaderProjectControls.test.tsx`, `components/layout/__tests__/issue-3175-browserCaptureRevealsPanel.test.ts`, and `lib/infiniteAnimations.test.ts`. Treat those as upstream failures; new failures are not acceptable.
 
 Commit and push:
 
@@ -155,7 +155,7 @@ After the fork branch is final:
 
 ```bash
 cd /home/opi/openchamber
-base=$(git rev-parse origin/main)
+base=$(git rev-parse v2.7.2)
 git diff "$base"..HEAD > /home/opi/openchamber-btw/btw-stateless.patch
 ```
 
@@ -261,7 +261,7 @@ The script reads `compileSdkVersion` from `packages/mobile/android/variables.gra
 
 This handles the old `platforms;android-35` naming and the newer `platforms;android-37.0` naming. `ANDROID_PLATFORM_PACKAGE` overrides it.
 
-Build-tools default to `<major>.0.0`. At the 2.7.0 base, Android uses compile SDK 37, platform `platforms;android-37.0`, build-tools `37.0.0`, and Gradle wrapper `9.9.0`.
+Build-tools default to `<major>.0.0`. At the 2.7.2 base, Android uses compile SDK 37, platform `platforms;android-37.0`, build-tools `37.0.0`, and Gradle wrapper `9.9.0`.
 
 Do not assume `/opt/homebrew` paths from the mobile package's scripts; the builder exports `JAVA_HOME`, `ANDROID_HOME`, and `ANDROID_SDK_ROOT` explicitly.
 
@@ -326,11 +326,11 @@ The screenshot at `assets/btw-android-dialog.png` came from this flow. If the di
 
 ## Release process
 
-Current release: `v2.7.0` with:
+Current release: `v2.7.2` with:
 
 ```text
-openchamber-btw-2.7.0-1-x86_64.pkg.tar.zst
-OpenChamber-btw-2.7.0-android-debug.apk
+openchamber-btw-2.7.2-1-x86_64.pkg.tar.zst
+OpenChamber-btw-2.7.2-android-debug.apk
 SHA256SUMS
 ```
 
@@ -457,10 +457,10 @@ These paths exist on the current workstation:
 Installed package:
 
 ```text
-openchamber-btw 2.7.0-1
+openchamber-btw 2.7.2-1
 ```
 
-The desktop app may still be the old 2.6.1 process after a package install. Do not kill it from an active session; restart it outside the session when the user is ready.
+The desktop app may still be the old 2.7.0 process after a package install. Do not kill it from an active session; restart it outside the session when the user is ready.
 
 Test emulator data (may be wiped):
 
